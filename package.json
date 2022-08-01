@@ -12,6 +12,7 @@
     "@mantine/core": "^5.0.0",
     "@mantine/notifications": "^4.2.12",
     "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "6",
