@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useForm, useToggle, upperFirst } from '@mantine/hooks';
+import { useToggle, upperFirst } from '@mantine/hooks';
+import { useForm } from '@mantine/form';
+import { Link } from "react-router-dom";
 import {
   TextInput,
   PasswordInput,
@@ -8,8 +10,6 @@ import {
   Group,
   PaperProps,
   Button,
-  Divider,
-  Checkbox,
   Anchor,
   Container,
   Title,
@@ -17,19 +17,17 @@ import {
   LoadingOverlay,
 } from '@mantine/core';
 import { api } from '../../Services/api';
-import { showNotification } from '@mantine/notifications';
-import { Check } from 'tabler-icons-react';
 import { login } from '../../Services/utils';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 
-export function Login(props: PaperProps<'div'>) {
+export function Login(props: PaperProps) {
   const form = useForm({
     initialValues: {
       name: '',
       password: '',
     },
 
-    validationRules: {
+    validate: {
       password: (val) => val.length >= 6,
     },
   });

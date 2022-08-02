@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useForm, useToggle, upperFirst } from '@mantine/hooks';
+import React from 'react';
+import { useForm } from '@mantine/form';
 import {
   TextInput,
   PasswordInput,
-  Text,
   Paper,
   Group,
-  GroupProps,
   PaperProps,
   Button,
-  Divider,
-  Checkbox,
-  Anchor,
   Container,
-  Notification,
   Stack,
   Title,
 } from '@mantine/core';
@@ -28,7 +22,7 @@ interface GroupProps {
   direction: string,
 }
 
-export function Register(props: PaperProps<'div'>) {
+export function Register(props: PaperProps) {
   const form = useForm({
     initialValues: {
       name: '',
@@ -38,7 +32,7 @@ export function Register(props: PaperProps<'div'>) {
       password: '',
     },
 
-    validationRules: {
+    validate: {
       password: (val) => val.length >= 6,
       email: (val) => /^\S+@\S+$/.test(val),
     },
@@ -49,8 +43,7 @@ export function Register(props: PaperProps<'div'>) {
   const senha = form.values.password
   const nome_empresa = form.values.companyName
 
-  let navigate: NavigateFunction
-  navigate = useNavigate()
+  let navigate = useNavigate()
 
   function HandleSubmit(event) {
     event.preventDefault();
@@ -60,13 +53,13 @@ export function Register(props: PaperProps<'div'>) {
       senha: senha,
       nome_empresa: nome_empresa,
     })
-      .then(() => showNotification({
+      .then(() => { showNotification({
         title: 'Conta criada!',
         message: 'Parabéns, sua conta foi criada com sucesso.',
         icon: <Check />
       }),
         navigate("/")
-      )
+      })
       .catch(() => showNotification({
         title: 'Algo deu errado!',
         color: 'red',

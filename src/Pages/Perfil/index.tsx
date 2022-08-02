@@ -31,7 +31,7 @@ import { Contacts } from "../../components/Contacts";
 
 export function Perfil() {
   const [perfis, setPerfis] = useState([]);
-  const [currentPerfil, setCurrentPerfil] = useState([]);
+  const [currentPerfil, setCurrentPerfil] = useState({});
   const [invites, setInvites] = useState([]);
   const [NewRequest, setNewRequest] = useState(false);
 
@@ -56,7 +56,6 @@ export function Perfil() {
   }, []);
 
   useEffect(() => {
-    console.log('ok')
     api.get('/perfis/')
       .then((resp) => setPerfis(resp.data))
       .catch(() => showNotification({
@@ -83,7 +82,7 @@ export function Perfil() {
       }));
   }
 
-  const rows = perfis?.map((perfil: any) => perfil.id == currentPerfil.id ? null : (
+  const rows = perfis?.map((perfil: any) => perfil.id == currentPerfil?.id ? null : (
     <tr key={perfil.id}>
 
       <td>
